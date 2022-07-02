@@ -30,3 +30,27 @@ class UnionRangeValidation extends RangeValiationBase {
 
 	return this.RangeCheck(this.GetNumber(val));
 }
+
+/* ---------------------------------------------- Convert Temprature ---------------------------------------------- */
+class FarToCel {
+	Convert(temp: number): string {
+		return `${(temp - 32) * 5 / 9} deg Celcius`;
+	}
+}
+
+class CelToFar {
+	Convert(temp: number): string {
+		return `${(temp * 9 / 5) + 32} deg Farenheit`;
+	}
+}
+
+class ConvertTemp {
+	Convert(temp: number, converter: FarToCel | CelToFar): string {
+		return converter.Convert(temp);
+	}
+}
+
+let converter = new ConvertTemp();
+console.log(converter.Convert(100, new CelToFar()));
+console.log(converter.Convert(98.6, new FarToCel()));
+
