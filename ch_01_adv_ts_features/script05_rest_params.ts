@@ -1,3 +1,6 @@
+/***********************************************
+ * Deconstructing objects with REST properties *
+ ***********************************************/
 let guitar = {
 	manufacturer: "Ibanez",
 	model: "Jem 777",
