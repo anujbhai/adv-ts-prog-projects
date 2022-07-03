@@ -62,3 +62,37 @@ function Role(role: string) {
 		return descriptor;
 	}
 }
+
+/* ----------------------------- Ex ------------------------------- */
+class Command {
+	public constructor(public Name: string = "", public Action: Function = new Function()) {}
+}
+
+class Commands {
+	private commands = new Map<string, Command> ();
+
+	public Add(...commands: Command[]) {
+		commands.forEach(command => {
+			this.Add(command);
+		});
+	}
+
+	@Log
+	public Add(command: Command) {
+		this.commands.set(command.Name, command);
+	}
+}
+
+function Log(target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+	let originalMethod = descriptor.value;
+
+	descriptor.value = function() {
+		console.log("Added a command");
+		originalMethod.apply(this, arguments);
+	}
+
+	return descriptor;
+}
+
+let command = new Commands();
+command.Add(new Command("Command1", new Function()), new Command("Command2", new Function()));
